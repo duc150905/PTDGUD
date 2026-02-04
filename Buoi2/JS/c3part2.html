@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="images"></div>
+    <script>
+        let currentImg;
+        function wait(seconds) {
+            return new Promise(function (resolve) {
+                setTimeout(resolve, seconds * 1000);
+            });
+        }
+        function createImage(imgPath) {
+            return new Promise(function (resolve, reject) {
+                const img = document.createElement('img');
+                img.src = imgPath;
+                img.addEventListener('load', function () {
+                    document.querySelector('.images').append(img);
+                    resolve(img);
+                })
+                img.addEventListener('error', function () {
+                    reject(new Error('Image not found'));
+                })
+            });
+        }
+        async function loadAll(imgArr) {
+            try {
+                const imgs = imgArr.map(path => createImage(path));
+                const images = await Promise.all(imgs);
+                images.forEach(img => img.classList.add('parallel'));
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        const imgArr = ['https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482740paR/anh-mo-ta.png'
+            , 'https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482740paR/anh-mo-ta.png'
+            , 'https://images2.thanhnien.vn/528068263637045248/2024/1/25/c3c8177f2e6142e8c4885dbff89eb92a-65a11aeea03da880-1706156293184503262817.jpg'];
+        loadAll(imgArr);
+    </script>
+
+
+</body>
+
+</html>

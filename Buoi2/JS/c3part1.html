@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let currentImg;
+        function wait(seconds) {
+            return new Promise(function (resolve) {
+                setTimeout(resolve, seconds * 1000);
+            });
+        }
+        function createImage(imgPath) {
+            return new Promise(function (resolve, reject) {
+                const img = document.createElement('img');
+                img.src = imgPath;
+                img.addEventListener('load', function () {
+                    document.querySelector('.images').append(img);
+                    resolve(img);
+                })
+                img.addEventListener('error', function () {
+                    reject(new Error('Image not found'));
+                })
+            });
+        }
+        async function loadNPause() {
+            try {
+                const img1 = await createImage('https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482740paR/anh-mo-ta.png')
+                await wait(2);
+                img1.style.display = 'none';
+                const img2 = await createImage('https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482740paR/anh-mo-ta.png')
+                await wait(2);
+                img2.style.display = 'none';
+            } catch (error) {
+                console.error(err);
+            }
+        }
+        loadNPause();
+    </script>
+
+
+</body>
+
+</html>
