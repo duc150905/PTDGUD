@@ -1,10 +1,8 @@
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom"
-import About from "./components/About"
-import Contact from "./components/Contact"
-import Home from "./components/Home"
-import NotFound from "./components/NotFound"
-import ProductDetail from "./components/ProductDetail"
-import Products from "./components/Products"
+import Dashboard from "./components/Dashboard"
+import Profile from "./components/Profile"
+import Settings from "./components/Settings"
+import Orders from "./components/Orders"
 import './App.css'
 
 function App() {
@@ -12,18 +10,15 @@ function App() {
     <>
       <BrowserRouter>
         <nav>
-          <Link to="/">Home|</Link>
-          <Link to="/Contact">Contact|</Link>
-          <Link to="/About">About|</Link>
-          <Link to="/products">Products</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </nav>
+
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="Profile" element={<Profile />} />
+            <Route path="Orders" element={<Orders />} />
+            <Route path="Settings" element={<Settings />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
