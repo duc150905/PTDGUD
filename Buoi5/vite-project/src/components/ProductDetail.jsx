@@ -1,9 +1,14 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 function ProductDetail() {
-    const {id}=useParams();
+    const navigate=useNavigate();
+    const handleBuy=()=>{
+      navigate("/checkout");
+    }
   return (
-    <h2>Product ID: {id}</h2>
+    <div>
+      <button onClick={handleBuy}>Mua hàng</button>
+    </div>
   )
 }
 
