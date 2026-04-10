@@ -6,12 +6,14 @@ import Profile from './Profile'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
 import ProductList from './ProductList'
+import Notification from './Notification'
 import Cart from './Cart'
 function App() {
   return (
-     <div style={{ display: "flex", gap: "50px" }}>
+    <div style={{ padding: "20px" }}>
+      <Notification />
+      <h1>Mini Shop</h1>
       <ProductList />
-      <Cart />
     </div>
   )
 }
