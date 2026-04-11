@@ -9,9 +9,10 @@ import ProductList from './ProductList'
 import Notification from './Notification'
 import Cart from './Cart'
 import UserList from './UserList'
+import SearchUser from './SearchUser'
 function App() {
   return (
-    <UserList />
+    <SearchUser/>
   )
 }
 
