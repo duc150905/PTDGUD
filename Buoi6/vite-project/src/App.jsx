@@ -10,9 +10,23 @@ import Notification from './Notification'
 import Cart from './Cart'
 import UserList from './UserList'
 import SearchUser from './SearchUser'
+import { useRecoilValue } from 'recoil'
+import { authState } from './authState'
+import Login from './Login'
+import Logout from './Logout'
 function App() {
+  const { token } = useRecoilValue(authState)
   return (
-    <SearchUser/>
+    <div>
+      {!token ? (
+        <Login />
+      ) : (
+        <>
+          <Logout />
+          <UserList />
+        </>
+      )}
+    </div>
   )
 }
 
