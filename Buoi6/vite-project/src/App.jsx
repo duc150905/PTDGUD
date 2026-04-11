@@ -8,13 +8,10 @@ import TodoList from './TodoList'
 import ProductList from './ProductList'
 import Notification from './Notification'
 import Cart from './Cart'
+import UserList from './UserList'
 function App() {
   return (
-    <div style={{ padding: "20px" }}>
-      <Notification />
-      <h1>Mini Shop</h1>
-      <ProductList />
-    </div>
+    <UserList />
   )
 }
 
