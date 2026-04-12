@@ -1,17 +1,16 @@
 import React from 'react'
-import { useNotification } from './useNotification'
+import { useProduct } from './ProductContext'
+import ProductItem from './ProductItem'
 function ProductList() {
-    const { showNotification } = useNotification();
-    const handleAdd = () => {
-        showNotification("Thêm sản phẩm thành công", "success");
-    }
-    const handleError = () => {
-        showNotification("Có lỗi xảy ra!", "error");
-    };
+    const { products, loading, error } = useProduct();
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error...</p>;
     return (
         <div>
-            <button onClick={handleAdd}>Add</button>
-            <button onClick={handleError}>Error</button>
+            <h2>Products</h2>
+            {products.map((p) => (
+                <ProductItem key={p.id} product={p} />
+            ))}
         </div>
     )
 }

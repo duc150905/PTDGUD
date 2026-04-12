@@ -14,19 +14,38 @@ import { useRecoilValue } from 'recoil'
 import { authState } from './authState'
 import Login from './Login'
 import Logout from './Logout'
-function App() {
-  const { token } = useRecoilValue(authState)
+import { AuthProvider, useAuth } from './AuthContext'
+import { ProductProvider } from './ProductContext'
+import { CartProvider } from './CartContext'
+import { NotiProvider } from './NotiContext'
+function MainApp() {
+  const { token, login, logout } = useAuth();
   return (
     <div>
+      <h1>Mini App</h1>
       {!token ? (
-        <Login />
+        <button onClick={login}>Login</button>
       ) : (
-        <>
-          <Logout />
-          <UserList />
-        </>
+        <button onClick={logout}>Logout</button>
       )}
+      <Notification />
+      <ProductList />
+      <Cart />
     </div>
+  )
+}
+function App() {
+
+  return (
+    <AuthProvider>
+      <ProductProvider>
+        <CartProvider>
+          <NotiProvider>
+            <MainApp />
+          </NotiProvider>
+        </CartProvider>
+      </ProductProvider>
+    </AuthProvider>
   )
 }
 
